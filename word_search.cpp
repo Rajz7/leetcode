@@ -4,16 +4,20 @@
 #include <string>
 
 int main(){
-    std::vector<char> board = {{'A', 'B', 'C', 'E'}, 
-                               {'S', 'F', 'C', 'S'}, 
-                               {'A', 'D', 'E', 'E'}};
+    std::vector<std::vector<char>> board = {{'A', 'B', 'C', 'E'}, 
+                                            {'S', 'F', 'C', 'S'}, 
+                                            {'A', 'D', 'E', 'E'}};
     int count;
     std::string word = "ABCCED";
-    
-    for(int i = 0; i < board.size(); i++){
-        for(int j = 0; j < board[i].size(); j++){
+    bool in_board = false;
+
+    for(int x = 0;x < board.size(); x++){
+        for(int y = 0; y < board[x].size(); y++){
             count = 1;
-            if(board[i][j] == word[0]){
+            std::cout << x << " " << y << " ";
+            if(board[x][y] == word[0]){
+                int i = x;
+                int j = y;
                 while(count < word.length()){
                     in_board = true;
                     if(j + 1 < board[i].size() && word[count] == board[i][j + 1])
@@ -31,8 +35,12 @@ int main(){
                     count ++;
                 }
             }
+            if(count == word.length())
+                break;
         }
+        if(count == word.length())
+            break;
     }
-
+    std::cout << in_board;
     return 0;
 }
